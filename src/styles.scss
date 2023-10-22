@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ngx-charts-tooltip-content {
+  background-color: theme('colors.green') !important;
+  .tooltip-caret {
+    border-top-color: theme('colors.green') !important;
+  }
+}

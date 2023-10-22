@@ -1,0 +1,21 @@
+<ngx-charts-pie-chart
+  [view]="[375, 300]"
+  [scheme]="colorScheme"
+  [results]="single"
+  [labels]="showLabels"
+  [maxLabelLength]="100"
+  (select)="onSelect($event)"
+>
+  <ng-template #tooltipTemplate let-model="model">
+    <div class="flex flex-col items-center px-2 py-1">
+      <span>
+        {{ model.name }}
+      </span>
+      <div class="flex items-center space-x-1">
+        <img src="../../assets/icons/medal-solid.svg" alt="medal-icon" class="w-3 h-3">
+        <span>{{ model.value }}</span>
+      </div>
+
+    </div>
+  </ng-template>
+</ngx-charts-pie-chart>

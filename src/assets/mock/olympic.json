@@ -2,6 +2,7 @@
   {
     "id": 1,
     "country": "Italy",
+    "color": "#956065",
     "participations": [
       {
         "id": 1,
@@ -29,6 +30,7 @@
   {
     "id": 2,
     "country": "Spain",
+    "color": "#B8CBE7",
     "participations": [
       {
         "id": 1,
@@ -56,6 +58,7 @@
   {
     "id": 3,
     "country": "United States",
+    "color": "#89A1DB",
     "participations": [
       {
         "id": 1,
@@ -83,6 +86,7 @@
   {
     "id": 4,
     "country": "Germany",
+    "color": "#793D52",
     "participations": [
       {
         "id": 1,
@@ -110,6 +114,7 @@
   {
     "id": 5,
     "country": "France",
+    "color": "#9780A1",
     "participations": [
       {
         "id": 1,
