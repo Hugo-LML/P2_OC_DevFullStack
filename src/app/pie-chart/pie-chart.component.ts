@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { OlympicService } from '../core/services/olympic.service';
 import { ScaleType } from '@swimlane/ngx-charts';
 
@@ -27,10 +27,18 @@ export class PieChartComponent implements OnInit {
 
   showLabels = true;
 
+  defaultView: [number, number] = [700, 400];
+  view: [number, number] = this.defaultView;
+
   constructor(private olympicService: OlympicService) {}
 
   onSelect(event: any) {
     console.log(event);
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.view = window.innerWidth < 768 ? [350, 300] : this.defaultView;
   }
 
   ngOnInit(): void {
@@ -44,5 +52,6 @@ export class PieChartComponent implements OnInit {
           }, 0),
         }})
     });
+    this.view = window.innerWidth < 768 ? [350, 300] : this.defaultView;
   }
 }
