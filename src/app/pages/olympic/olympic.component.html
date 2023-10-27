@@ -1,0 +1,21 @@
+<a routerLink="" class="absolute left-4 top-4 md:left-8 md:top-8 text-green border border-green rounded-lg px-2 py-1 hover:bg-green hover:text-white transition">Back</a>
+<main class="flex flex-col justify-center items-center space-y-8 w-full h-screen">
+  <div class="flex flex-col items-center">
+    <h1 class="heading">{{ olympic!.country }}</h1>
+    <div class="mt-4 md:mt-8 flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-4 text-sm">
+      <div class="tab">
+        <span class="text-gray">Number of entries</span>
+        <span class="font-bold">{{ olympic!.participations.length }}</span>
+      </div>
+      <div class="tab">
+        <span class="text-gray">Total number medals</span>
+        <span class="font-bold">{{ totalMedals!.toString() }}</span>
+      </div>
+      <div class="tab">
+        <span class="text-gray">Total number of athletes</span>
+        <span class="font-bold">{{ totalAthletes!.toString() }}</span>
+      </div>
+    </div>
+  </div>
+  <app-line-chart [olympic]="olympic"></app-line-chart>
+</main>

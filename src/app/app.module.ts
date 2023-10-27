@@ -7,11 +7,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { OlympicComponent } from './pages/olympic/olympic.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent, PieChartComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgxChartsModule],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent, PieChartComponent, OlympicComponent, LineChartComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, NgxChartsModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

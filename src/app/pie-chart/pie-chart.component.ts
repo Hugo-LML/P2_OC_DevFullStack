@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { OlympicService } from '../core/services/olympic.service';
 import { ScaleType } from '@swimlane/ngx-charts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pie-chart',
@@ -25,15 +26,14 @@ export class PieChartComponent implements OnInit {
     value: number;
   }[] | undefined = [];
 
-  showLabels = true;
-
   defaultView: [number, number] = [700, 400];
   view: [number, number] = this.defaultView;
 
-  constructor(private olympicService: OlympicService) {}
+  constructor(private olympicService: OlympicService, private router: Router) {}
 
-  onSelect(event: any) {
-    console.log(event);
+  onSelect(event: { name: string, value: number, label: string }) {
+    const selectedOlympic = this.olympicService.getOlympicByName(event.name);
+    if (selectedOlympic) this.router.navigateByUrl(`olympics/${selectedOlympic.id}`);
   }
 
   @HostListener('window:resize')
@@ -52,6 +52,7 @@ export class PieChartComponent implements OnInit {
           }, 0),
         }})
     });
+
     this.view = window.innerWidth < 768 ? [350, 300] : this.defaultView;
   }
 }

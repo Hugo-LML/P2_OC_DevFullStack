@@ -1,12 +1,12 @@
 <main class="flex flex-col justify-center items-center space-y-4 w-full h-screen">
   <div class="flex flex-col items-center">
-    <h1 class="text-white text-xl md:text-2xl bg-green rounded-lg px-2 py-1">Medals per Country</h1>
+    <h1 class="heading">Medals per Country</h1>
     <div class="mt-8 flex space-x-12 text-sm">
-      <div class="flex flex-col items-center space-y-0 px-2.5 py-2 rounded-lg border md:border-2 border-green">
+      <div class="tab">
         <span class="text-gray">Number of JOs</span>
         <span class="font-bold">3</span>
       </div>
-      <div class="flex flex-col items-center space-y-0 px-2.5 py-2 rounded-lg border md:border-2 border-green">
+      <div class="tab">
         <span class="text-gray">Number of countries</span>
         <span *ngIf="(olympics$ | async) as olympics" class="font-bold">{{ olympics.length }}</span>
       </div>

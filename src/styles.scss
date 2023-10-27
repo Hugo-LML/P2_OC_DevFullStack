@@ -4,7 +4,18 @@
 
 .ngx-charts-tooltip-content {
   background-color: theme('colors.green') !important;
-  .tooltip-caret {
+  .position-top {
     border-top-color: theme('colors.green') !important;
   }
+  .position-right {
+    border-right-color: theme('colors.green') !important;
+  }
+}
+
+.heading {
+  @apply text-white text-xl md:text-2xl bg-green rounded-lg px-2 py-1;
+}
+
+.tab {
+  @apply flex flex-col items-center px-2.5 py-2 rounded-lg border md:border-2 border-green;
 }

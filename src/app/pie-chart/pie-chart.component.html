@@ -2,7 +2,7 @@
   [view]="view"
   [scheme]="colorScheme"
   [results]="single"
-  [labels]="showLabels"
+  [labels]="true"
   [maxLabelLength]="100"
   (select)="onSelect($event)"
 >
@@ -15,7 +15,6 @@
         <img src="../../assets/icons/medal-solid.svg" alt="medal-icon" class="w-3 h-3">
         <span>{{ model.value }}</span>
       </div>
-
     </div>
   </ng-template>
 </ngx-charts-pie-chart>

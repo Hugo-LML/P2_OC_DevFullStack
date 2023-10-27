@@ -29,4 +29,12 @@ export class OlympicService {
   getOlympics() {
     return this.olympics$.asObservable();
   }
+
+  getOlympicById(id: number): Olympic | undefined {
+    return this.olympics$.value?.find(olympic => olympic.id === id);
+  }
+
+  getOlympicByName(name: string): Olympic | undefined {
+    return this.olympics$.value?.find(olympic => olympic.country === name);
+  }
 }
