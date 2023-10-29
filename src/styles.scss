@@ -10,6 +10,9 @@
   .position-right {
     border-right-color: theme('colors.green') !important;
   }
+  .position-left {
+    border-left-color: theme('colors.green') !important;
+  }
 }
 
 .heading {
@@ -18,4 +21,8 @@
 
 .tab {
   @apply flex flex-col items-center px-2.5 py-2 rounded-lg border md:border-2 border-green;
+}
+
+.button {
+  @apply text-green border border-green rounded-lg px-2 py-1 hover:bg-green hover:text-white transition;
 }

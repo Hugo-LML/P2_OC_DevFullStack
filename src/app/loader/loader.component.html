@@ -1,0 +1,8 @@
+<main class="flex justify-center items-center w-full h-screen">
+  <img *ngIf="!isWaitTimeExpired" src="../../assets/icons/loader.svg" alt="loader" class="h-10 w-10 animate-spin">
+  <div class="flex flex-col gap-y-4 items-center">
+    <h1 *ngIf="isWaitTimeExpired" class="heading">Oops something went wrong !</h1>
+    <a *ngIf="url !== '/' && isWaitTimeExpired" routerLink="" class="button">Back to home</a>
+    <button *ngIf="url === '/' && isWaitTimeExpired" (click)="reloadPage()" class="button">Reload</button>
+  </div>
+</main>

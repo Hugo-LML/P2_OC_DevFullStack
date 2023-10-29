@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Olympic } from '../core/models/Olympic';
-import { ScaleType } from '@swimlane/ngx-charts';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
+import { Multi } from '../core/models/NgxChart';
+import { ChartsService } from '../core/services/charts.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -8,54 +10,39 @@ import { ScaleType } from '@swimlane/ngx-charts';
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent implements OnInit {
-  @Input() olympic: Olympic | undefined;
+  @Input() olympic?: Olympic;
 
-  colorScheme: {
-    name: string;
-    selectable: boolean;
-    group: ScaleType;
-    domain: string[];
-  } = {
+  colorScheme: Color = {
     name: '',
     selectable: false,
     group: ScaleType.Linear,
-    domain: []
+    domain: [],
   };
 
-  multi: {
-    name: string;
-    series: {
-      name: string;
-      value: number;
-    }[]
-  }[] | undefined = [];
+  multi: Multi = [];
 
-  defaultView: [number, number] = [700, 300];
+  defaultView: [number, number] = this.chartsService.getChartView('LINE_CHART_DEFAULT_VIEW');
   view: [number, number] = this.defaultView;
-
+  
+  constructor(private chartsService: ChartsService) {}
+  
   formatTick(val: number): string {
-    if (val % 1 === 0) {
-      return val.toLocaleString();
-    } else {
-      return '';
-    }
+    return val % 1 === 0 ? val.toLocaleString() : '';
   }
-
-  constructor() {}
 
   @HostListener('window:resize')
   onResize(): void {
-    this.view = window.innerWidth < 768 ? [350, 300] : this.defaultView;
+    this.view = window.innerWidth < 768 ? this.chartsService.getChartView('CHART_MOBILE_VIEW') : this.defaultView;
   }
 
   ngOnInit(): void {
-    this.colorScheme = {name: this.olympic!.country, selectable: true, group: ScaleType.Linear, domain: [this.olympic!.color]};
+    this.colorScheme = { name: this.olympic!.country, selectable: true, group: ScaleType.Linear, domain: [this.chartsService.getColor(this.olympic!.id) ?? ''] };
 
     this.multi = [{ name: this.olympic!.country, series: this.olympic!.participations.map(participation => {
       return { name: participation.year.toString(), value: participation.medalsCount }
     }) }]
 
-    this.view = window.innerWidth < 768 ? [350, 300] : this.defaultView;
+    this.view = window.innerWidth < 768 ? this.chartsService.getChartView('CHART_MOBILE_VIEW') : this.defaultView;
   }
 
 }

@@ -16,22 +16,18 @@ export class OlympicService {
   loadInitialData() {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
-      catchError((error, caught) => {
+      catchError(error => {
         // TODO: improve error handling
         console.error(error);
         // can be useful to end loading state and let the user know something went wrong
         this.olympics$.next(null);
-        return caught;
+        return error;
       })
     );
   }
 
   getOlympics() {
     return this.olympics$.asObservable();
-  }
-
-  getOlympicById(id: number): Olympic | undefined {
-    return this.olympics$.value?.find(olympic => olympic.id === id);
   }
 
   getOlympicByName(name: string): Olympic | undefined {

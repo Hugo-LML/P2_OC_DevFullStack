@@ -1,35 +1,32 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { OlympicService } from '../core/services/olympic.service';
-import { ScaleType } from '@swimlane/ngx-charts';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Single } from '../core/models/NgxChart';
+import { ChartsService } from '../core/services/charts.service';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss']
 })
-export class PieChartComponent implements OnInit {
-  colorScheme: {
-    name: string;
-    selectable: boolean;
-    group: ScaleType;
-    domain: string[];
-  } = {
+export class PieChartComponent implements OnInit, OnDestroy {
+  colorScheme: Color = {
     name: '',
     selectable: false,
     group: ScaleType.Linear,
     domain: []
   };
 
-  single: {
-    name: string;
-    value: number;
-  }[] | undefined = [];
+  single: Single = [];
 
-  defaultView: [number, number] = [700, 400];
+  defaultView: [number, number] = this.chartsService.getChartView('PIE_CHART_DEFAULT_VIEW');
   view: [number, number] = this.defaultView;
 
-  constructor(private olympicService: OlympicService, private router: Router) {}
+  olympicSubscription!: Subscription;
+
+  constructor(private olympicService: OlympicService, private chartsService: ChartsService, private router: Router) {}
 
   onSelect(event: { name: string, value: number, label: string }) {
     const selectedOlympic = this.olympicService.getOlympicByName(event.name);
@@ -38,12 +35,12 @@ export class PieChartComponent implements OnInit {
 
   @HostListener('window:resize')
   onResize(): void {
-    this.view = window.innerWidth < 768 ? [350, 300] : this.defaultView;
+    this.view = window.innerWidth < 768 ? this.chartsService.getChartView('CHART_MOBILE_VIEW') : this.defaultView;
   }
 
   ngOnInit(): void {
-    this.olympicService.getOlympics().subscribe(olympics => {
-      this.colorScheme.domain = olympics?.map(olympic => olympic.color) || [];
+    this.olympicSubscription = this.olympicService.getOlympics().subscribe(olympics => {
+      this.colorScheme.domain = this.chartsService.getColors();
       this.single = olympics?.map(olympic => {
         return {
           name: olympic.country,
@@ -53,6 +50,10 @@ export class PieChartComponent implements OnInit {
         }})
     });
 
-    this.view = window.innerWidth < 768 ? [350, 300] : this.defaultView;
+    this.view = window.innerWidth < 768 ? this.chartsService.getChartView('CHART_MOBILE_VIEW') : this.defaultView;
+  }
+
+  ngOnDestroy(): void {
+    this.olympicSubscription.unsubscribe();
   }
 }

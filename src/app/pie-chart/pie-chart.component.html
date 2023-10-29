@@ -1,4 +1,5 @@
 <ngx-charts-pie-chart
+  *ngIf="single!.length > 0"
   [view]="view"
   [scheme]="colorScheme"
   [results]="single"
@@ -18,3 +19,6 @@
     </div>
   </ng-template>
 </ngx-charts-pie-chart>
+<span *ngIf="single?.length === 0" class="heading">
+  No data to display
+</span>
