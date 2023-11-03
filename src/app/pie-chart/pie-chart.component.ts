@@ -28,11 +28,13 @@ export class PieChartComponent implements OnInit, OnDestroy {
 
   constructor(private olympicService: OlympicService, private chartsService: ChartsService, private router: Router) {}
 
+  // Navigation to the detail page of the country clicked
   onSelect(event: { name: string, value: number, label: string }) {
     const selectedOlympic = this.olympicService.getOlympicByName(event.name);
     if (selectedOlympic) this.router.navigateByUrl(`olympics/${selectedOlympic.id}`);
   }
 
+  // Resize of the chart based on the window size
   @HostListener('window:resize')
   onResize(): void {
     this.view = window.innerWidth < 768 ? this.chartsService.getChartView('CHART_MOBILE_VIEW') : this.defaultView;

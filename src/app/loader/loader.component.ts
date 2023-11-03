@@ -14,6 +14,7 @@ export class LoaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.isWaitTimeExpired = false;
+    // If the data is not loaded after 5 seconds, then prompt error
     setTimeout(() => {
       this.isWaitTimeExpired = true;
       this.url = this.router.url;

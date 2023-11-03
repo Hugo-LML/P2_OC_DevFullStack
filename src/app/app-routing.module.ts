@@ -14,7 +14,7 @@ const routes: Routes = [
     component: OlympicComponent,
   },
   {
-    path: '**', // wildcard
+    path: '**',
     component: NotFoundComponent,
   },
 ];

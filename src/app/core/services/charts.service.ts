@@ -18,14 +18,17 @@ export class ChartsService {
 
   constructor() {}
 
+  // Get list of colors
   getColors(): string[] {
     return [...this.colors.map(color => color.hexacode)];
   }
 
+  // Get one specific color based on its id
   getColor(id: number): string | undefined {
     return this.colors.find(color => color.id === id)?.hexacode;
   }
 
+  // Get the size of the given chart 
   getChartView(chartView: 'PIE_CHART_DEFAULT_VIEW' | 'LINE_CHART_DEFAULT_VIEW' | 'CHART_MOBILE_VIEW'): [number, number] {
     switch (chartView) {
       case 'PIE_CHART_DEFAULT_VIEW':

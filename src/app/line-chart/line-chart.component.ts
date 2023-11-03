@@ -26,10 +26,12 @@ export class LineChartComponent implements OnInit {
   
   constructor(private chartsService: ChartsService) {}
   
+  // Format tick to have integral number
   formatTick(val: number): string {
     return val % 1 === 0 ? val.toLocaleString() : '';
   }
 
+  // Resize of the chart based on the window size
   @HostListener('window:resize')
   onResize(): void {
     this.view = window.innerWidth < 768 ? this.chartsService.getChartView('CHART_MOBILE_VIEW') : this.defaultView;
